@@ -16,7 +16,7 @@ const ActiveEvents = ({ navigation }) => {
         return formatStr
     }
 
-    // console.log("first19",eventState.data.data)
+    console.log("first19",eventState.data.data)
 
     return (
         <View style={styles.container}>

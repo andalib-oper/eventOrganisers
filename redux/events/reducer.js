@@ -9,7 +9,7 @@ import {
 
 const initialState = {
     loading: true,
-    data: []
+    data: [],
 }
 
 const eventReducer = (state = initialState, action) => {
@@ -60,7 +60,7 @@ const eventReducer = (state = initialState, action) => {
             // console.log("events reducer", action.data)
             return {
                 ...state,
-                data: [],
+                // data: [],
                 loading: false,
                 error: action.error
             }
