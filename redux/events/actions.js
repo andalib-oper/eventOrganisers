@@ -85,6 +85,8 @@ export const approveTicket = (id, event, Alert) => {
                 console.log("error caught")
             }
         } catch (error) {
+            console.log("errorapprove", error.response)
+            Alert.alert(error?.response?.data)
             dispatch(reqFailure(error.message))
         }
     }
@@ -116,6 +118,8 @@ export const disapproveTicket = (id, event, reason, Alert) => {
                 console.log("error caught")
             }
         } catch (error) {
+            console.log("errordisapprove", error.response)
+            Alert.alert(error?.response?.data)
             dispatch(reqFailure(error.message))
         }
     }

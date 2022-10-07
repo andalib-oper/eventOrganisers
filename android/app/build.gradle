@@ -225,11 +225,11 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-            release {
-      storeFile file('demo.keystore')
-      storePassword '12345678'
-      keyAlias 'demo'
-      keyPassword '12345678'
+          release {
+      storeFile file('your_key_name.keystore')
+      storePassword 'abcd1234'
+      keyAlias 'your_key_alias'
+      keyPassword 'abcd1234'
     }
     }
     buildTypes {
@@ -243,6 +243,7 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
                   signingConfig signingConfigs.release
+
         }
     }
 

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -16,32 +16,42 @@ const ActiveEvents = ({ navigation }) => {
         return formatStr
     }
 
+    // console.log("first19",eventState.data.data)
+
     return (
         <View style={styles.container}>
             <ScrollView>
-                {eventState?.data?.data && eventState?.data?.data.map((item) => {
-                    return (
-                        <View>
-                            <View style={styles.header}>
-                                <TouchableOpacity  onPress={() => navigation.navigate('scanner', {ticketId:item?._id})}>
-                                {/* <TouchableOpacity  onPress={() => console.log("id", item._id)}> */}
-                                    
-                                    <Text style={styles.eventName}>{item.name}</Text>
-                                    <Text style={styles.eventTime}>Show Date: <Text style={{ color: "grey" }}> {formatDate(item.date)}</Text></Text>
-                                    {/* <Text style={styles.eventTime}>Total Tickets Sold:<Text style={{ color: 'grey' }}> {'\b'}56{'\b'} </Text></Text> */}
-                                </TouchableOpacity>
-                                <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-                                <TouchableOpacity style={styles.updatePrice}>
-                                    <Text style={styles.updatePriceText}>Update Price</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.updatePrice}>
-                                    <Text style={styles.updatePriceText}>Download</Text>
-                                </TouchableOpacity>
+                {eventState.loading ?
+                <View style={{justifyContent: 'center', alignSelf: 'center', marginTop: '70%'}}>
+                    <ActivityIndicator size='large'/>
+                </View>
+                    :
+                    <>
+                        {eventState?.data?.data && eventState?.data?.data.map((item) => {
+                            return (
+                                <View>
+                                    <View style={styles.header}>
+                                        <TouchableOpacity onPress={() => navigation.navigate('scanner', { ticketId: item?._id })}>
+                                            {/* <TouchableOpacity  onPress={() => console.log("id", item._id)}> */}
+
+                                            <Text style={styles.eventName}>{item.name}</Text>
+                                            <Text style={styles.eventTime}>Show Date: <Text style={{ color: "grey" }}> {formatDate(item.date)}</Text></Text>
+                                            {/* <Text style={styles.eventTime}>Total Tickets Sold:<Text style={{ color: 'grey' }}> {'\b'}56{'\b'} </Text></Text> */}
+                                        </TouchableOpacity>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 5, marginTop: '5%'}}>
+                                            <TouchableOpacity style={styles.updatePrice}>
+                                                <Text style={styles.updatePriceText}>Update Price</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={styles.updatePrice}>
+                                                <Text style={styles.updatePriceText}>Download</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
-                    )
-                })}
+                            )
+                        })}
+                    </>
+                }
             </ScrollView>
         </View>
     )
@@ -64,6 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         elevation: 5,
         borderRadius: 10,
+        padding: 10,
         height: 'auto',
         width: width / 1.1,
         justifyContent: 'center'
@@ -85,19 +96,20 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginBottom: 5,
     },
-    updatePrice:{
+    updatePrice: {
         marginBottom: 5,
         width: 'auto',
-        height: 30,
+        height: 40,
         padding: 5,
         borderRadius: 10,
         marginRight: 10,
         backgroundColor: '#003975',
         alignSelf: 'flex-end'
     },
-    updatePriceText:{
+    updatePriceText: {
         fontSize: 14,
         fontWeight: '400',
-        color: '#fff'
+        color: '#fff',
+        padding: 5
     },
 })

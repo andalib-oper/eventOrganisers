@@ -30,7 +30,7 @@ const eventReducer = (state = initialState, action) => {
             }
         }
         case GET_ALL_EVENTS: {
-            // console.log("events reducer", action.data)
+            console.log("events reducer get all ticket", action.data)
             return {
                 ...state,
                 data: action.data,
@@ -42,7 +42,7 @@ const eventReducer = (state = initialState, action) => {
             console.log("events reducer approve", action.data)
             return {
                 ...state,
-                data: action.data,
+                // data: action.data,
                 loading: false,
                 error: ''
             }
@@ -51,7 +51,7 @@ const eventReducer = (state = initialState, action) => {
             console.log("events reducer disapprove", action.data)
             return {
                 ...state,
-                data: action.data,
+                // data: action.data,
                 loading: false,
                 error: ''
             }

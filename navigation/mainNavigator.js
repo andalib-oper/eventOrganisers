@@ -45,7 +45,7 @@ const mainNavigator = () => {
           // ),
         }}
       />
-      <Tab.Screen name="report" component={Report}
+      {/* <Tab.Screen name="report" component={Report}
         options={{
           tabBarLabel: 'Report',
           tabBarIcon: ({ color }) => (
@@ -98,7 +98,7 @@ const mainNavigator = () => {
               onPress={() => navigation.goBack()} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
