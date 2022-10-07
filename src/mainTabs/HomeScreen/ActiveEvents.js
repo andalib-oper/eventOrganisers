@@ -23,10 +23,12 @@ const ActiveEvents = ({ navigation }) => {
                     return (
                         <View>
                             <View style={styles.header}>
-                                <TouchableOpacity  onPress={() => navigation.navigate('scanner')}>
+                                <TouchableOpacity  onPress={() => navigation.navigate('scanner', {ticketId:item?._id})}>
+                                {/* <TouchableOpacity  onPress={() => console.log("id", item._id)}> */}
+                                    
                                     <Text style={styles.eventName}>{item.name}</Text>
                                     <Text style={styles.eventTime}>Show Date: <Text style={{ color: "grey" }}> {formatDate(item.date)}</Text></Text>
-                                    <Text style={styles.eventTime}>Total Tickets Sold:<Text style={{ color: 'grey' }}> {'\b'}56{'\b'} </Text></Text>
+                                    {/* <Text style={styles.eventTime}>Total Tickets Sold:<Text style={{ color: 'grey' }}> {'\b'}56{'\b'} </Text></Text> */}
                                 </TouchableOpacity>
                                 <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                                 <TouchableOpacity style={styles.updatePrice}>

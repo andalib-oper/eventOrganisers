@@ -17,75 +17,78 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import EventTable from '../../../components/EventTable';
 import { approveTicket, disapproveTicket } from '../../../redux/events/actions';
 
-const Scanner = () => {
+const Scanner = ({route}) => {
+
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false);
   const [text, onChangeText] = useState("Useless Text");
-  const [scan, setScan] = useState(true)
+  const [scan, setScan] = useState(false)
   const [ScanResult, setScanResult] = useState({})
-  const [result, setResult] = useState(
-    {
-      ticket:
-      {
-        type: "gold",
-        guest:
-        {
-          name: "Imtiyaz",
-          email: "kjdfs",
-          phone: "283",
-          age: 23
-        },
-        id: "62f37b3fcf8a3f1c2485f34d",
-        event:
-        {
-          location: {
-            city: {
-              name: "kolkata",
-              state: {
-                name: "west bengal",
-                country: {
-                  name: "india"
-                }
-              }
-            },
-            address: "abcd/2/3"
-          },
-          cancellation:
-          {
-            status: "LIVE",
-            initiateCancellationReason: null,
-            confirmCancellationReason: null
-          },
-          _id: "62e76e1782718e39b895a3f2",
-          name: "test event",
-          date: "2025-12-12",
-          organiser:
-          {
-            _id: "62d2908a52f35824aaf4b727",
-            name: "brad"
-          },
-          venue: "62e76e1782718e39b895a3ec",
-          description: "description",
-          time: "12:12",
-          poster: "16593341673902022-06-22-15:37:49-screenshot.png",
-          createdAt: "2022-08-01T06:09:27.473Z",
-          updatedAt: "2022-08-10T10:26:21.006Z",
-          v: 0,
-          above18: true
-        },
-        number: "A-1",
-        section: "62e76e1782718e39b895a3ed",
-        price: 999,
-        phone: "123",
-        _v: 0,
-        createdAt: "2022-08-10T09:32:47.726Z",
-        updatedAt: "2022-08-10T10:34:07.049Z",
-        isApproved: false,
-        disapproveReason: "nothing"
-      }
-    }
-  )
-  // console.log("clg", result)
+  const [result, setResult] = useState({})
+  const { ticketId } = route.params;
+  // const [result, setResult] = useState(
+  //   {
+  //     ticket:
+  //     {
+  //       type: "gold",
+  //       guest:
+  //       {
+  //         name: "Imtiyaz",
+  //         email: "kjdfs",
+  //         phone: "283",
+  //         age: 23
+  //       },
+  //       id: "62f37b3fcf8a3f1c2485f34d",
+  //       event:
+  //       {
+  //         location: {
+  //           city: {
+  //             name: "kolkata",
+  //             state: {
+  //               name: "west bengal",
+  //               country: {
+  //                 name: "india"
+  //               }
+  //             }
+  //           },
+  //           address: "abcd/2/3"
+  //         },
+  //         cancellation:
+  //         {
+  //           status: "LIVE",
+  //           initiateCancellationReason: null,
+  //           confirmCancellationReason: null
+  //         },
+  //         _id: "62e76e1782718e39b895a3f2",
+  //         name: "test event",
+  //         date: "2025-12-12",
+  //         organiser:
+  //         {
+  //           _id: "62d2908a52f35824aaf4b727",
+  //           name: "brad"
+  //         },
+  //         venue: "62e76e1782718e39b895a3ec",
+  //         description: "description",
+  //         time: "12:12",
+  //         poster: "16593341673902022-06-22-15:37:49-screenshot.png",
+  //         createdAt: "2022-08-01T06:09:27.473Z",
+  //         updatedAt: "2022-08-10T10:26:21.006Z",
+  //         v: 0,
+  //         above18: true
+  //       },
+  //       number: "A-1",
+  //       section: "62e76e1782718e39b895a3ed",
+  //       price: 999,
+  //       phone: "123",
+  //       _v: 0,
+  //       createdAt: "2022-08-10T09:32:47.726Z",
+  //       updatedAt: "2022-08-10T10:34:07.049Z",
+  //       isApproved: false,
+  //       disapproveReason: "nothing"
+  //     }
+  //   }
+  // )
+  console.log("clg", result, ticketId)
   const onSuccess = (e) => {
     const check = e.data;
     console.log('scanned data' + check);
@@ -93,27 +96,28 @@ const Scanner = () => {
     console.log("obj", obj)
     setResult(obj)
     setScan(false)
-    setScanResult(true)
+    setScanResult(false)
   }
 
   const activeQR = () => {
     console.log("50")
     setScan(true)
+    setScanResult(true)
     console.log("52")
   }
   const scanAgain = () => {
     setScan(true)
-    setScanResult(false)
+    setScanResult(true)
   }
   const onSubmit = () => {
-    if (result.ticket.isApproved) {
-      return
-    }
-    dispatch(approveTicket(result?.ticket?.id, result?.ticket?.event?._id, Alert))
+    // if (result.ticket) {
+    //   return
+    // }
+    dispatch(approveTicket(result?.ticket?._id, ticketId, Alert))
   }
   const onReject = () => {
     // console.log("auth at scanner", authState.accessToken)
-    dispatch(disapproveTicket(result?.ticket?.id, result?.ticket?.event?._id, text, Alert))
+    dispatch(disapproveTicket(result?.ticket?._id, ticketId, text, Alert))
   }
   return (
     <View style={styles.container}>
@@ -130,7 +134,7 @@ const Scanner = () => {
             fontSize: 16,
             color: '#000'
           }}>Please Click On the button To Scan The QR Code</Text>
-          {!scan && !ScanResult &&
+          {!scan  && ScanResult &&
             <TouchableOpacity
               style={{
                 justifyContent: 'center',
@@ -141,7 +145,7 @@ const Scanner = () => {
                 marginTop: '20%',
                 // margin: '20%',
                 backgroundColor: '#003975',
-                height: height / 13,
+                height: height / 15,
                 width: width / 3,
                 padding: 5,
               }}
@@ -154,9 +158,9 @@ const Scanner = () => {
                 textAlign: 'center'
               }}>Click to Scan !</Text>
             </TouchableOpacity>
-          }
+           } 
         </View>
-        {ScanResult &&
+        {!ScanResult &&
           <View>
             <View>
               <View style={{
@@ -171,50 +175,15 @@ const Scanner = () => {
               </View>
               <EventTable
                 name="Ticket Number"
-                map={result?.ticket?.number}
-              />
-              <EventTable
-                name="Ticket Price"
-                map={result?.ticket?.price}
-              />
-              <EventTable
-                name="Ticket Type"
-                map={result?.ticket?.type}
+                map={result?.ticket?._id}
               />
               <EventTable
                 name="Event Name"
-                map={result?.ticket?.event?.name}
-              />
-              <EventTable
-                name="Event Date"
-                map={result?.ticket?.event?.date}
-              />
-              <EventTable
-                name="Event Location"
-                map={result?.ticket?.event?.location?.address + " " +
-                  result?.ticket?.event?.location?.city?.name + " " +
-                  result?.ticket?.event?.location?.city?.state?.name + " " +
-                  result?.ticket?.event?.location?.city?.state?.country?.name}
-              />
-              <EventTable
-                name="Event Time"
-                map={result?.ticket?.event?.time}
-              />
-              <EventTable
-                name="User Email"
-                map={result?.ticket?.guest?.email}
-              />
-              <EventTable
-                name="Name"
-                map={result?.ticket?.guest?.name}
-              />
-              <EventTable
-                name="User Phone"
-                map={result?.ticket?.guest?.phone}
+                map={result?.ticket?.name}
               />
               <EventTable
                 name="Age"
-                map={result?.ticket?.guest?.age}
+                map={result?.ticket?.age}
               />
               <View style={{
                 flexDirection: 'row'
@@ -237,8 +206,10 @@ const Scanner = () => {
                     textAlign: 'center',
                     padding: 10,
                     color: '#fff'
-                  }}>{result.ticket.isApproved ? "Ticket already Approved" : "Approve"}</Text>
-
+                  }}>
+                    Approve Ticket
+                    {/* {result.ticket ? "Ticket already Approved" : "Approve"} */}
+                    </Text>
                 </TouchableOpacity>
                 <View>
                   <Modal
@@ -246,7 +217,7 @@ const Scanner = () => {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                      Alert.alert("Modal has been closed.");
+                      Alert.alert("Are you sure you dont want to reject");
                       setModalVisible(!modalVisible);
                     }}
                   >
@@ -309,7 +280,7 @@ const Scanner = () => {
             </View>
           </View>
         }
-        {!scan &&
+        {scan &&
           <QRCodeScanner
             reactivate={true}
             showMarker={true}
@@ -350,6 +321,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    color: '#000'
   },
   buttonText: {
     padding: 8,

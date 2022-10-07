@@ -11,7 +11,6 @@ const config = () => {
   useEffect(() => {
     dispatch(tokenRetriever());
   }, [dispatch]);
-
   const authState = useSelector(state => state.authState);
   return (
     <NavigationContainer>

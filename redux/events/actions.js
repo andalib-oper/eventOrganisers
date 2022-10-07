@@ -41,13 +41,13 @@ export const getAllEvents = (accessToken) => {
             const token = JSON.parse(await AsyncStorage.getItem('eventAuthToken'))
             // console.log("token at event action", token)
             const response = await axios.get(
-                `http://10.0.2.2:5000/api/organiser-employee/events`,
+                `https://admin.nowbooking.com.au/api/organiser-employee/events`,
                 {
                     headers: { authorization: token.accessToken }
                 },
             )
             if (response.status) {
-                console.log("first", response.data)
+                console.log("first event action", response.data)
                 dispatch(getEvents(response.data))
             } else {
                 dispatch(reqFailure())
@@ -67,7 +67,7 @@ export const approveTicket = (id, event, Alert) => {
             console.log("token at event action", id)
             // console.log("ticket approved", response.data)
             const response = await axios.post(
-                `http://10.0.2.2:5000/api/organiser-employee/approve-ticket`,
+                `https://admin.nowbooking.com.au/api/organiser-employee/approve-ticket`,
                 {
                     ticket: id,
                     event
@@ -97,7 +97,7 @@ export const disapproveTicket = (id, event, reason, Alert) => {
             const token = JSON.parse(await AsyncStorage.getItem('eventAuthToken'))
             console.log("token at event action", token, id, event, reason)
             const response = await axios.post(
-                `http://10.0.2.2:5000/api/organiser-employee/disapprove-ticket`,
+                `https://admin.nowbooking.com.au/api/organiser-employee/disapprove-ticket`,
                 {
                     ticket: id,
                     event,

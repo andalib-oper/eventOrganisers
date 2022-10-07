@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#FAFAFA',
         padding: 10,
+        color: '#000'
     },
     error: {
         color: 'red'

@@ -33,7 +33,7 @@ export const logUserIn = (loginData) => {
     dispatch(req());
     console.log('login works');
     try {
-      const response = await axios.post(`http://10.0.2.2:5000/api/organiser-employee/login`, {
+      const response = await axios.post(`https://admin.nowbooking.com.au/api/organiser-employee/login`, {
         email: loginData.email,
         password: loginData.password,
       });
@@ -87,7 +87,7 @@ export const tokenRetriever = () => {
     try {
       const token = JSON.parse( await AsyncStorage.getItem('eventAuthToken'));
       console.log("23",token)
-      const url = `http://10.0.2.2:5000/api/organiser-employee/isUserLoggedIn`
+      const url = `https://admin.nowbooking.com.au/api/organiser-employee/isUserLoggedIn`
       const res = await axios.post(
         url,
         {},
