@@ -85,7 +85,7 @@ export const approveTicket = (id, event, Alert) => {
                 console.log("error caught")
             }
         } catch (error) {
-            console.log("errorapprove", error.response)
+            console.log("errorapprove", error.response.data, "error message", error.message)
             Alert.alert(error?.response?.data)
             dispatch(reqFailure(error.message))
         }
