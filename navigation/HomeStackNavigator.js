@@ -5,6 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Home from '../src/mainTabs/HomeScreen/Home';
 import Scanner from '../src/mainTabs/HomeScreen/scanner';
+import Login from '../src/rootTabs/Login'
 
 const tabHiddenRoutes = ["scanner"];
 const Stack = createStackNavigator();
@@ -38,6 +39,7 @@ const HomeStackNavigator = ({ navigation, route }) => {
           ),
         }}
       />
+      {/* <Stack.Screen name='login' component={Login}/> */}
     </Stack.Navigator>
   )
 }

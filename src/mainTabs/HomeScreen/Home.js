@@ -3,7 +3,10 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getAllEvents } from '../../../redux/events/actions'
+import {logout, logUserOut} from '../../../redux/auth/action'
 import HomTobTab from './HomTobTab'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+// import { useRoute } from '@react-navigation/native/lib/typescript/src'
 
 const Home = ({ navigation }) => {
   const eventState = useSelector((state) => state.eventState)
@@ -16,11 +19,19 @@ const Home = ({ navigation }) => {
     const formatStr = `${arr[2]}-${arr[1]}-${arr[0]}`
     return formatStr
   }
-
+const userOut =()=> {
+  AsyncStorage.removeItem('eventAuthToken')
+  dispatch(logout())
+}
   // console.log(formatDate())
   return (
     <View style={styles.container}>
       <HomTobTab/>
+      <TouchableOpacity
+            style={styles.button}
+            onPress={() => userOut()}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
     </View>
   )
 }
@@ -34,6 +45,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  button: {
+    marginTop: 10,
+    marginBottom: 5,
+    marginRight: '5%',
+    width: '40%',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: "center",
+    alignSelf: 'flex-end',
+    backgroundColor: '#003975',
+    borderRadius: 10,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: 'white'
   },
   // heading: {
   //   fontSize: 18,

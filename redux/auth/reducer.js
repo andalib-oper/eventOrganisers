@@ -55,7 +55,7 @@ const initialState = {
        }
       }
       case LOGOUT: {
-        const currUserId = state.userId;
+        // const currUserId = state.userId;
         console.log("logout successfully at auth reducer");
         return {
           ...initialState

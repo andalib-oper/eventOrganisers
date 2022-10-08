@@ -4,16 +4,16 @@ import {UPDATE_FIELDS,
   
   const initialState = {
     inputValues: {
-      email: 'brad@gmail.com',
-      password: 'pwd',
+      email: '',
+      password: '',
     },
     inputValidity: {
-      email: true,
-      password: true,
+      email: false,
+      password: false,
     },
     isTouched: {
-      email: true,
-      password: true,
+      email: false,
+      password: false,
     },
     // finalFormState: false
   };

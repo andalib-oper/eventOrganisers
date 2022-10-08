@@ -8,6 +8,7 @@ import {
 } from './actionTypes';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 export const req = () => ({
   type: REQ,
@@ -26,6 +27,10 @@ export const setNewAuthToken = (newAuthToken, newAuthTokenExpiry) => ({
   type: SET_NEW_AUTH_TOKEN,
   newAuthToken,
   newAuthTokenExpiry,
+});
+
+export const logout = () => ({
+  type: LOGOUT
 });
 
 export const logUserIn = (loginData) => {
@@ -69,12 +74,11 @@ export const logUserIn = (loginData) => {
       }
     } catch (err) {
       console.log(err.message);
-      if (err.message.includes('401')) {
-        dispatch(reqFailure('Invalid credentials!'));
-      } else {
-        console.log("catch", err.mesage)
-        dispatch(reqFailure(err.message));
-      }
+      if (err.response.data.msg) {
+        // dispatch(reqFailure('Invalid credentials!'));
+        console.log("catch", err.response.data.msg)
+        dispatch(logout(Alert.alert(err.response.data.msg)));
+      } 
     }
   };
 };
@@ -100,13 +104,28 @@ export const tokenRetriever = () => {
       console.log("first", res.data)
       dispatch({ type: USERLOGGEDIN, payload: token })
     } catch (error) {
-      console.log("first", error.message)
-      dispatch({type: LOGOUT})
+      console.log("token retriever response data", error.response, "token retriever error msg", error.message)
+      // await AsyncStorage.removeItem('eventAuthToken');
+      dispatch(logout())
     }
   }
 };
 
+// export const logUserOut = () => {
+//   console.log('logging out');
+//   return async (dispatch) => {
+//     // dispatch(req());
+//     try {
+//       await AsyncStorage.removeItem('eventAuthToken');
+//       // dispatch(reqSuccess('', ''));
+//       // dispatch(logout());
+//       console.log('Async Storage emptied!');
+//     } catch (err) {
+//       //? ERROR RETRIEVING ASYNC STORAGE DATA.
+//       console.log('unable to logout: ', err.message);
+//       //? here, the loginFailure action sets the loading to false automatically.
+//       dispatch(reqFailure(err.message));
+//     }
+//   };
+// };
 
-export const logout = () => ({
-  type: LOGOUT
-});
