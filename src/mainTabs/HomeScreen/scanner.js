@@ -26,68 +26,6 @@ const Scanner = ({route}) => {
   const [ScanResult, setScanResult] = useState({})
   const [result, setResult] = useState({})
   const { ticketId } = route.params;
-  // const [result, setResult] = useState(
-  //   {
-  //     ticket:
-  //     {
-  //       type: "gold",
-  //       guest:
-  //       {
-  //         name: "Imtiyaz",
-  //         email: "kjdfs",
-  //         phone: "283",
-  //         age: 23
-  //       },
-  //       id: "62f37b3fcf8a3f1c2485f34d",
-  //       event:
-  //       {
-  //         location: {
-  //           city: {
-  //             name: "kolkata",
-  //             state: {
-  //               name: "west bengal",
-  //               country: {
-  //                 name: "india"
-  //               }
-  //             }
-  //           },
-  //           address: "abcd/2/3"
-  //         },
-  //         cancellation:
-  //         {
-  //           status: "LIVE",
-  //           initiateCancellationReason: null,
-  //           confirmCancellationReason: null
-  //         },
-  //         _id: "62e76e1782718e39b895a3f2",
-  //         name: "test event",
-  //         date: "2025-12-12",
-  //         organiser:
-  //         {
-  //           _id: "62d2908a52f35824aaf4b727",
-  //           name: "brad"
-  //         },
-  //         venue: "62e76e1782718e39b895a3ec",
-  //         description: "description",
-  //         time: "12:12",
-  //         poster: "16593341673902022-06-22-15:37:49-screenshot.png",
-  //         createdAt: "2022-08-01T06:09:27.473Z",
-  //         updatedAt: "2022-08-10T10:26:21.006Z",
-  //         v: 0,
-  //         above18: true
-  //       },
-  //       number: "A-1",
-  //       section: "62e76e1782718e39b895a3ed",
-  //       price: 999,
-  //       phone: "123",
-  //       _v: 0,
-  //       createdAt: "2022-08-10T09:32:47.726Z",
-  //       updatedAt: "2022-08-10T10:34:07.049Z",
-  //       isApproved: false,
-  //       disapproveReason: "nothing"
-  //     }
-  //   }
-  // )
   console.log("clg", result, ticketId)
   const onSuccess = (e) => {
     const check = e.data;
