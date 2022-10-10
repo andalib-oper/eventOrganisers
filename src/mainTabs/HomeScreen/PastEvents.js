@@ -30,7 +30,8 @@ const PastEvents = ({navigation}) => {
   // }
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        refreshControl={<RefreshControl refreshing={eventState.loading} />}>
         {eventState.pastEvents.data &&
           eventState.pastEvents.data.map(item => {
             return (
@@ -71,25 +72,25 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 'auto',
     width: width / 1.1,
-    justifyContent: 'center'
-},
-eventName: {
+    justifyContent: 'center',
+  },
+  eventName: {
     marginTop: 5,
     fontSize: 18,
     fontWeight: '700',
     textAlign: 'left',
     color: '#003975',
     marginBottom: 5,
-    marginLeft: 10
-},
-eventTime: {
+    marginLeft: 10,
+  },
+  eventTime: {
     fontSize: 14,
     fontWeight: '400',
     textAlign: 'left',
     color: '#003975',
     marginLeft: 10,
     marginBottom: 5,
-},
+  },
   updatePrice: {
     marginBottom: 5,
     width: 'auto',
