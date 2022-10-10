@@ -54,7 +54,7 @@ export const getAllEvents = accessToken => {
         },
       );
       if (response) {
-        console.log('first event action', response.data);
+        // console.log('first event action', response.data);
         dispatch(getEvents(response.data));
       } else {
         dispatch(reqFailure());
@@ -79,7 +79,7 @@ export const getAllPastEvents = accessToken => {
         },
       );
       if (response) {
-        console.log('first event action', response.data);
+        console.log('first past event action', response.data);
         dispatch(getPastEvents(response.data));
       } else {
         dispatch(reqFailure());

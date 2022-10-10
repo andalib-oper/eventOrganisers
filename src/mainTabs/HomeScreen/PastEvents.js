@@ -17,31 +17,34 @@ const PastEvents = ({navigation}) => {
   useEffect(() => {
     dispatch(getAllPastEvents());
   }, [dispatch]);
-  const formatDate = (date) => {
-    const arr = date.split("-")
-    const formatStr = `${arr[2]}-${arr[1]}-${arr[0]}`
-    return formatStr
-}
-  console.log('past events screen', eventState.pastEvents.data);
+  const formatDate = date => {
+    const arr = date.split('-');
+    const formatStr = `${arr[2]}-${arr[1]}-${arr[0]}`;
+    return formatStr;
+  };
+  console.log('past events', eventState.pastEvents.data);
+  // console.log('past events screen', eventState.pastEvents.data); refreshControl={
+  //     <RefreshControl
+  //     refreshing={eventState.loading}
+  //     />
+  // }
   return (
     <View style={styles.container}>
-      <ScrollView refreshControl={
-                <RefreshControl
-                refreshing={eventState.loading}
-                />
-            }>
-      <View style={styles.header}>
-        {eventState?.pastEvents?.data.map(item => {
-          return (
-            <TouchableOpacity onPress={() => console.log('object')}>
-              <Text style={styles.eventName}>{item.name}</Text>
-              <Text style={styles.eventTime}>
-                Show Date: <Text style={{color: 'grey'}}>{formatDate(item.date)}</Text>
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      <ScrollView>
+        {eventState.pastEvents.data &&
+          eventState.pastEvents.data.map(item => {
+            return (
+              <View style={styles.header}>
+                <View>
+                  <Text style={styles.eventName}>{item.name}</Text>
+                  <Text style={styles.eventTime}>
+                    Show Date:{' '}
+                    <Text style={{color: 'grey'}}>{formatDate(item.date)}</Text>
+                  </Text>
+                </View>
+              </View>
+            );
+          })}
       </ScrollView>
     </View>
   );
@@ -65,27 +68,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 5,
     borderRadius: 10,
+    padding: 10,
     height: 'auto',
     width: width / 1.1,
-    // justifyContent: 'center'
-  },
-  eventName: {
+    justifyContent: 'center'
+},
+eventName: {
     marginTop: 5,
     fontSize: 18,
     fontWeight: '700',
     textAlign: 'left',
     color: '#003975',
     marginBottom: 5,
-    marginLeft: 10,
-  },
-  eventTime: {
+    marginLeft: 10
+},
+eventTime: {
     fontSize: 14,
     fontWeight: '400',
     textAlign: 'left',
     color: '#003975',
     marginLeft: 10,
     marginBottom: 5,
-  },
+},
   updatePrice: {
     marginBottom: 5,
     width: 'auto',

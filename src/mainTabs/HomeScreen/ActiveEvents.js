@@ -20,11 +20,7 @@ const ActiveEvents = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView refreshControl={
-                <RefreshControl
-                refreshing={eventState.loading}
-                />
-            }>
+            <ScrollView>
                 {eventState.loading ?
                 <View style={{justifyContent: 'center', alignSelf: 'center', marginTop: '70%'}}>
                     <ActivityIndicator size='large'/>
