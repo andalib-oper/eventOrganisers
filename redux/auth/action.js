@@ -111,21 +111,21 @@ export const tokenRetriever = () => {
   }
 };
 
-// export const logUserOut = () => {
-//   console.log('logging out');
-//   return async (dispatch) => {
-//     // dispatch(req());
-//     try {
-//       await AsyncStorage.removeItem('eventAuthToken');
-//       // dispatch(reqSuccess('', ''));
-//       // dispatch(logout());
-//       console.log('Async Storage emptied!');
-//     } catch (err) {
-//       //? ERROR RETRIEVING ASYNC STORAGE DATA.
-//       console.log('unable to logout: ', err.message);
-//       //? here, the loginFailure action sets the loading to false automatically.
-//       dispatch(reqFailure(err.message));
-//     }
-//   };
-// };
+export const logUserOut = () => {
+  console.log('logging out');
+  return async (dispatch) => {
+    // dispatch(req());
+    try {
+      await AsyncStorage.removeItem('eventAuthToken');
+      // dispatch(reqSuccess('', ''));
+      dispatch(logout());
+      console.log('Async Storage emptied!');
+    } catch (err) {
+      //? ERROR RETRIEVING ASYNC STORAGE DATA.
+      console.log('unable to logout: ', err.message);
+      //? here, the loginFailure action sets the loading to false automatically.
+      dispatch(reqFailure(err.message));
+    }
+  };
+};
 

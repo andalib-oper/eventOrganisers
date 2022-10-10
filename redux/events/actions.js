@@ -2,6 +2,7 @@ import {
   REQ_SUCCESS,
   REQ_FAILURE,
   GET_ALL_EVENTS,
+  GET_ALL_PAST_EVENTS,
   DISAPPROVE_TICKET,
   REQ,
   APPROVE_TICKET,
@@ -21,6 +22,12 @@ export const getEvents = data => ({
   type: GET_ALL_EVENTS,
   data,
 });
+
+export const getPastEvents = data => ({
+  type: GET_ALL_PAST_EVENTS,
+  data,
+});
+
 export const ticketApprove = data => ({
   type: APPROVE_TICKET,
   data,
@@ -46,9 +53,34 @@ export const getAllEvents = accessToken => {
           headers: {authorization: token.accessToken},
         },
       );
-      if (response.status) {
+      if (response) {
         console.log('first event action', response.data);
         dispatch(getEvents(response.data));
+      } else {
+        dispatch(reqFailure());
+        console.log('error caught');
+      }
+    } catch (error) {
+      dispatch(reqFailure(error.message));
+    }
+  };
+};
+
+export const getAllPastEvents = accessToken => {
+  return async dispatch => {
+    dispatch(req());
+    try {
+      const token = JSON.parse(await AsyncStorage.getItem('eventAuthToken'));
+      // console.log("token at event action", token)
+      const response = await axios.get(
+        `https://admin.nowbooking.com.au/api/organiser-employee/past-events`,
+        {
+          headers: {authorization: token.accessToken},
+        },
+      );
+      if (response) {
+        console.log('first event action', response.data);
+        dispatch(getPastEvents(response.data));
       } else {
         dispatch(reqFailure());
         console.log('error caught');

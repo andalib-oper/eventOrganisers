@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Dimensions, StyleSheet, Text, View, ScrollView, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -16,11 +16,15 @@ const ActiveEvents = ({ navigation }) => {
         return formatStr
     }
 
-    console.log("first19",eventState.data.data)
+    // console.log("first19",eventState.data.data)
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView refreshControl={
+                <RefreshControl
+                refreshing={eventState.loading}
+                />
+            }>
                 {eventState.loading ?
                 <View style={{justifyContent: 'center', alignSelf: 'center', marginTop: '70%'}}>
                     <ActivityIndicator size='large'/>
@@ -38,14 +42,14 @@ const ActiveEvents = ({ navigation }) => {
                                             <Text style={styles.eventTime}>Show Date: <Text style={{ color: "grey" }}> {formatDate(item.date)}</Text></Text>
                                             {/* <Text style={styles.eventTime}>Total Tickets Sold:<Text style={{ color: 'grey' }}> {'\b'}56{'\b'} </Text></Text> */}
                                         </TouchableOpacity>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 5, marginTop: '5%'}}>
+                                        {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 5, marginTop: '5%'}}>
                                             <TouchableOpacity style={styles.updatePrice}>
                                                 <Text style={styles.updatePriceText}>Update Price</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity style={styles.updatePrice}>
                                                 <Text style={styles.updatePriceText}>Download</Text>
                                             </TouchableOpacity>
-                                        </View>
+                                        </View> */}
                                     </View>
                                 </View>
                             )

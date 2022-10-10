@@ -20,8 +20,7 @@ const Home = ({ navigation }) => {
     return formatStr
   }
 const userOut =()=> {
-  AsyncStorage.removeItem('eventAuthToken')
-  dispatch(logout())
+  dispatch(logUserOut())
 }
   // console.log(formatDate())
   return (
