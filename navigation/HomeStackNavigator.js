@@ -23,7 +23,8 @@ const HomeStackNavigator = ({ navigation, route }) => {
     <Stack.Navigator initialRouteName='home'>
       <Stack.Screen name="home" component={Home} 
       options={{
-        headerTitle: 'Events'
+        headerTitle: 'Events',
+        headerShown: true
       }}
       />
       <Stack.Screen name="scanner" component={Scanner}

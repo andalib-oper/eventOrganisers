@@ -1,19 +1,12 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
 
 
-const Report = () => {
+const Report = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View>
+      <Text style={{color: '#000'}} onPress={()=>navigation.navigate('reportDetails')}>ReportScreen</Text>
+      {/* <View>
   <LineChart
     data={{
       labels: ["January", "February", "March", "April", "May", "June"],
@@ -57,7 +50,7 @@ const Report = () => {
       borderRadius: 16
     }}
   />
-</View>
+</View> */}
     </View>
   )
 }

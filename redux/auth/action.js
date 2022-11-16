@@ -43,14 +43,11 @@ export const logUserIn = (loginData) => {
         password: loginData.password,
       });
       console.log("response",response.data)
-      if (response.headers.error) {
-        dispatch(reqFailure('Invalid login credentials! Please try again.'));
-        // console.log(response.headers.error);
-      } else if (response) {
+      if (response) {
         // console.log('saving to async storage');
         console.log('COMPLETE RESPONSE DATA:', response.data)
         //? SAVING USER DATA TO ASYNC STORAGE ON SUCCESSFUL LOGIN.
-        if (response.data) {
+        // if (response.data) {
           const userData = JSON.stringify({
             accessToken: response.data,
           });
@@ -58,35 +55,21 @@ export const logUserIn = (loginData) => {
           // console.log('Saved data to async storage!');
           // console.log(response)
           dispatch(reqSuccess(response.data));
-        } else {
-          dispatch(
-            reqFailure(
-              "You Are Not Authorized"
-            ),
-          );
-        }
-      } else {
-        dispatch(
-          reqFailure(
-            "Something's not right! Please try again after some time.",
-          ),
-        );
+        // }
       }
     } catch (err) {
       console.log(err.message);
-      if (err.response.data.msg) {
+      if (err?.response?.data?.msg) {
         // dispatch(reqFailure('Invalid credentials!'));
         console.log("catch", err.response.data.msg)
-        dispatch(logout(Alert.alert(err.response.data.msg)));
+        dispatch(logout(Alert.alert(err?.response?.data?.msg)));
       } 
     }
   };
 };
 
 export const tokenRetriever = () => {
-  console.log('login works567');
   return async (dispatch) => {
-    console.log('login works123');
     dispatch(req());
     try {
       const token = JSON.parse( await AsyncStorage.getItem('eventAuthToken'));

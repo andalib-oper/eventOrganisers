@@ -22,7 +22,7 @@ const PastEvents = ({navigation}) => {
     const formatStr = `${arr[2]}-${arr[1]}-${arr[0]}`;
     return formatStr;
   };
-  console.log('past events', eventState.pastEvents.data);
+  // console.log('past events', eventState.pastEvents.data);
   // console.log('past events screen', eventState.pastEvents.data); refreshControl={
   //     <RefreshControl
   //     refreshing={eventState.loading}
@@ -42,6 +42,23 @@ const PastEvents = ({navigation}) => {
                     Show Date:{' '}
                     <Text style={{color: 'grey'}}>{formatDate(item.date)}</Text>
                   </Text>
+                  {/* <View style={styles.ticketDetailsView}> */}
+                <Text style={styles.eventTime}>Total Tickets Sold: {'\b'}
+                <Text style={{color: 'grey'}}>120</Text>
+                </Text>
+                <Text style={styles.eventTime}>Total Check In: {'\b'}
+                <Text style={{color: 'grey'}}>90</Text>
+                </Text>
+                <Text style={styles.eventTime}>Total Revenue: {'\b'}
+                <Text style={{color: 'grey'}}>4500</Text>
+                </Text>
+                <Text style={styles.eventTime}>Commission amount: {'\b'}
+                <Text style={{color: 'grey'}}>1000</Text>
+                </Text>
+                <Text style={styles.eventTime}>Net Amount: {'\b'}
+                <Text style={{color: 'grey'}}>4000</Text>
+                </Text>
+              {/* </View> */}
                 </View>
               </View>
             );
@@ -88,6 +105,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'left',
     color: '#003975',
+    // width: '100%',
+    // backgroundColor: 'pink',
     marginLeft: 10,
     marginBottom: 5,
   },
